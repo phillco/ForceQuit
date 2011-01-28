@@ -54,12 +54,17 @@ namespace PelletDispenser
         {
             using ( Process process = new Process( ) )
             {
-                process.StartInfo.FileName = Url;
+                string url = Url;
+                if ( !url.StartsWith( "http://" ) && !url.StartsWith( "https://" ) )
+                    url = "http://" + url;
+
+                process.StartInfo.FileName = url;
                 process.Start( );
             }
 
             UsesLeftToday--;
             LastUsed = DateTime.Now;
+            Configuration.Save( );
         }
 
         public bool HasImage( )

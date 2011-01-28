@@ -41,7 +41,7 @@ namespace PelletDispenser
             {
                 Button button = createSiteButton( site );
                
-                
+                // Start a new row if needed.
                 if ( x + button.Width + 15 > Width )
                 {
                     x = 15;
@@ -163,6 +163,17 @@ namespace PelletDispenser
 
             Configuration.Instance.Sites.Remove( site );
             rebuildSiteButtons( );
+        }
+
+        private void btnAddSite_Click( object sender, EventArgs e )
+        {
+            new AddSiteForm( ).ShowDialog( );
+            rebuildSiteButtons( );
+        }
+
+        private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
+        {
+            trayIcon.Visible = false;
         }
     }
 }

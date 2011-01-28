@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,11 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="loading" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\images\loading.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <metadata name="fetchFaviconWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="lookupTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>177, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAA
+        AAD///8AAAAAAAAAAAAAAAAAAAAACgAAACUAAAAzAAAAMwAAADMAAAAzAAAAJQAAAAoAAAAAAAAAAAAA
+        AAD///8A////AAAAAAAAAAAAAAAAIgBPK1wAg0fJAIxL/wCLSv8Ai0r/AIxL/wCDR8kATytcAAAAHgAA
+        AAAAAAAA////AP///wAAAAAAAAAAHgCARrsAkFD/AaFp/wCqdv8Aq3f/AKt3/wCqdv8BoWn/AJBQ/wB8
+        RKoAAAAeAAAAAP///wD///8AAAAACgB8Q6oAkVL/Aqx3/wDDjP8A1pn/GN6o/xjeqP8A1pn/AMOM/wGr
+        dv8AklP/AHxEqgAAAAr///8A////AABZMVEAkFH/D7SD/wLSmf8A1pv/ANGT////////////ANGT/wDW
+        m/8A0Zj/Aat2/wCQUP8AWjFR////AP///wAAg0XJFqt4/xHJl/8A1Jr/ANKX/wDNjv///////////wDN
+        jv8A0pf/ANWb/wDBjP8BoWn/AIRHyf///wD///8AAIpI/zjEnP8A0Zj/AM2S/wDLjv8Ax4f/////////
+        //8Ax4f/AMuO/wDOk/8A0Jr/AKt2/wCMS/////8A////AACJRv9R0q//EtSj////////////////////
+        ////////////////////////AM+X/wCteP8Ai0r/////AP///wAAiEX/Zt2+/xDQov//////////////
+        /////////////////////////////wDNl/8ArXj/AItK/////wD///8AAIhG/3bgxf8Aypj/AMWQ/wDE
+        jv8AwYf///////////8AwYf/AMSO/wDHk/8Ay5n/AKt2/wCMS/////8A////AACIRr5ZyaT/Sd68/wDH
+        lP8Ax5T/AMOO////////////AMOO/wDIlv8Ay5r/BsGQ/wChaP8Ai0u/////AP///wAAjEszCpRY/634
+        6f8Y0Kf/AMSU/wDCkP///////////wDDkf8Ax5n/Bcib/xi3h/8AkFD/AI5NM////wD///8AAAAAAACK
+        SKoZnGP/vP/3/13kyf8Aw5f/AL+Q/wDAkf8AxJj/Isqi/zHCl/8Dk1X/AI1MlQAAAAD///8A////AAAA
+        AAAAAAAAAIpIlQ6WWf901bb/n/Pg/5Lv2v955cr/Xda1/y61hv8DkVL/AIxMqgAAAAAAAAAA////AP//
+        /wAAAAAAAAAAAAAAAAAAjEozAIlGuwCHRP8Ah0P/AIdE/wCJRv8Ai0m7AI1MMwAAAAAAAAAAAAAAAP//
+        /wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP//
+        /wD///8A8A8AAOAHAADAAwAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAwAMAAOAH
+        AADwDwAA//8AAA==
+</value>
   </data>
 </root>

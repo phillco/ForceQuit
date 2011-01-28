@@ -37,6 +37,7 @@
             this.siteContextMenu = new System.Windows.Forms.ContextMenuStrip( this.components );
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem( );
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem( );
+            this.btnAddSite = new System.Windows.Forms.Button( );
             this.trayIconMenu.SuspendLayout( );
             this.siteContextMenu.SuspendLayout( );
             this.SuspendLayout( );
@@ -84,21 +85,35 @@
             // 
             this.editToolStripMenuItem.Font = new System.Drawing.Font( "Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.editToolStripMenuItem.Size = new System.Drawing.Size( 107, 22 );
             this.editToolStripMenuItem.Text = "Edit...";
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size( 152, 22 );
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size( 107, 22 );
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler( this.deleteToolStripMenuItem_Click );
+            // 
+            // btnAddSite
+            // 
+            this.btnAddSite.Image = global::PelletDispenser.Properties.Resources.add;
+            this.btnAddSite.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddSite.Location = new System.Drawing.Point( 359, 143 );
+            this.btnAddSite.Name = "btnAddSite";
+            this.btnAddSite.Size = new System.Drawing.Size( 74, 26 );
+            this.btnAddSite.TabIndex = 2;
+            this.btnAddSite.Text = "Add site";
+            this.btnAddSite.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddSite.UseVisualStyleBackColor = true;
+            this.btnAddSite.Click += new System.EventHandler( this.btnAddSite_Click );
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 445, 181 );
+            this.Controls.Add( this.btnAddSite );
             this.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ( (System.Drawing.Icon) ( resources.GetObject( "$this.Icon" ) ) );
@@ -106,6 +121,7 @@
             this.Name = "MainForm";
             this.Text = "Pellet Dispenser";
             this.Load += new System.EventHandler( this.MainForm_Load );
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler( this.MainForm_FormClosing );
             this.Resize += new System.EventHandler( this.MainForm_Resize );
             this.trayIconMenu.ResumeLayout( false );
             this.siteContextMenu.ResumeLayout( false );
@@ -122,6 +138,7 @@
         private System.Windows.Forms.ContextMenuStrip siteContextMenu;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.Button btnAddSite;
     }
 }
 

@@ -70,7 +70,7 @@ namespace PelletDispenser
 
         public static void Save( )
         {
-            //ThreadPool.QueueUserWorkItem( delegate { Instance.SaveToFile( ); } );
+            ThreadPool.QueueUserWorkItem( delegate { Instance.SaveToFile( ); } );
         }
 
         private void SaveToFile( )
