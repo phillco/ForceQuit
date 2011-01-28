@@ -37,6 +37,7 @@ namespace PelletDispenser
             // Create the buttons for each site. 
             int x = 15;
             int y = 15;
+            int widestButton = 0;
             foreach ( Website site in Configuration.Instance.Sites )
             {
                 Button button = createSiteButton( site );
@@ -50,12 +51,17 @@ namespace PelletDispenser
  
                 button.Left = x;
                 button.Top = y;
+
+                if ( button.Width > widestButton )
+                    widestButton = button.Width;
+
                 x += button.Width + 10;
 
                 Controls.Add( button );
-                SiteButtons.Add( button );
-                             
+                SiteButtons.Add( button );                             
             }
+
+            MinimumSize = new Size( widestButton + 48, y + 125 );
 
             UpdateState( );
         }
@@ -141,6 +147,8 @@ namespace PelletDispenser
         {
             if ( WindowState == FormWindowState.Minimized )
                 Hide( );
+
+            rebuildSiteButtons( );
         }
 
         private void SiteButtonClicked( Button button )

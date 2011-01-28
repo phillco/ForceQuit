@@ -97,9 +97,10 @@
             // 
             // btnAddSite
             // 
+            this.btnAddSite.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
             this.btnAddSite.Image = global::PelletDispenser.Properties.Resources.add;
             this.btnAddSite.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddSite.Location = new System.Drawing.Point( 359, 143 );
+            this.btnAddSite.Location = new System.Drawing.Point( 359, 145 );
             this.btnAddSite.Name = "btnAddSite";
             this.btnAddSite.Size = new System.Drawing.Size( 74, 26 );
             this.btnAddSite.TabIndex = 2;
@@ -115,9 +116,9 @@
             this.ClientSize = new System.Drawing.Size( 445, 181 );
             this.Controls.Add( this.btnAddSite );
             this.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ( (System.Drawing.Icon) ( resources.GetObject( "$this.Icon" ) ) );
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size( 75, 75 );
             this.Name = "MainForm";
             this.Text = "Pellet Dispenser";
             this.Load += new System.EventHandler( this.MainForm_Load );
