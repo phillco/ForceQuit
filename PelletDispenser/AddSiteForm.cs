@@ -81,9 +81,7 @@ namespace PelletDispenser
 
         private void fetchFaviconWorker_DoWork( object sender, DoWorkEventArgs e )
         {
-            string url = tbUrl.Text;
-            if ( !url.StartsWith( "http://" ) && !url.StartsWith( "https://" ) )
-                url = "http://" + url;
+            string url = Util.FormatUrl( tbUrl.Text );
 
             Uri uri;
             if ( Uri.TryCreate( url, UriKind.Absolute, out uri ) )

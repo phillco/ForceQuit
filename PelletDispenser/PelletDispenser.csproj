@@ -51,6 +51,7 @@
       <DependentUpon>AddSiteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
+    <Compile Include="HostsFileController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +87,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Util.cs" />
     <Compile Include="Website.cs" />
   </ItemGroup>
   <ItemGroup>

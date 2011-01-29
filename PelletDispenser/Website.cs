@@ -21,6 +21,14 @@ namespace PelletDispenser
 
         public DateTime LastUsed { get; set; }
 
+        public Uri Uri
+        {
+            get
+            {
+                return new Uri( Util.FormatUrl( Url ) );
+            }
+        }
+
         public int UsesLeftToday
         {
             get
@@ -59,7 +67,7 @@ namespace PelletDispenser
                     url = "http://" + url;
 
                 process.StartInfo.FileName = url;
-                process.Start( );
+                process.Start();
             }
 
             UsesLeftToday--;

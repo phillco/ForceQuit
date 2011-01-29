@@ -25,7 +25,7 @@ namespace PelletDispenser
                 ShowInTaskbar = false;
             }
 
-            rebuildSiteButtons( );            
+            rebuildSiteButtons( );
         }
 
         private void rebuildSiteButtons( )
@@ -41,14 +41,14 @@ namespace PelletDispenser
             foreach ( Website site in Configuration.Instance.Sites )
             {
                 Button button = createSiteButton( site );
-               
+
                 // Start a new row if needed.
                 if ( x + button.Width + 15 > Width )
                 {
                     x = 15;
                     y += button.Height + 10;
                 }
- 
+
                 button.Left = x;
                 button.Top = y;
 
@@ -58,7 +58,7 @@ namespace PelletDispenser
                 x += button.Width + 10;
 
                 Controls.Add( button );
-                SiteButtons.Add( button );                             
+                SiteButtons.Add( button );
             }
 
             MinimumSize = new Size( widestButton + 48, y + 125 );
@@ -71,7 +71,7 @@ namespace PelletDispenser
             Button button = new Button
             {
                 Tag = site,
-                Width = (int) ( 40 + site.ToString().Length * 5.75), // HACK
+                Width = (int) ( 40 + site.ToString( ).Length * 5.75 ), // HACK
                 Height = 32,
                 ContextMenuStrip = siteContextMenu,
                 Font = new Font( Font, FontStyle.Bold ),
@@ -81,7 +81,7 @@ namespace PelletDispenser
                 ImageAlign = ContentAlignment.MiddleLeft,
                 TextAlign = ContentAlignment.MiddleRight
             };
-     
+
             button.MouseClick += ( sender, e ) => siteButton_MouseClick( button, e );
             button.AutoSize = false;
             return button;
@@ -140,6 +140,7 @@ namespace PelletDispenser
             {
                 Show( );
                 WindowState = FormWindowState.Normal;
+                BringToFront( );
             }
         }
 
@@ -155,13 +156,9 @@ namespace PelletDispenser
         {
             Website site = (Website) button.Tag;
             button.Enabled = false;
-
-            ThreadPool.QueueUserWorkItem( delegate
-            {
-                Thread.Sleep( 400 );
-                site.Use( );
-                UpdateState( );
-            } );
+            site.Use( );
+            UpdateState( );
+            Hide( );
         }
 
         private void deleteToolStripMenuItem_Click( object sender, EventArgs e )

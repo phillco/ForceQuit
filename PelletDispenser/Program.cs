@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PelletDispenser
 {
@@ -16,7 +17,9 @@ namespace PelletDispenser
 
             Application.EnableVisualStyles( );
             Application.SetCompatibleTextRenderingDefault( false );
+
+            HostsFileController.Rebuild( );
             Application.Run( new MainForm( ) );
-        }
+        }        
     }
 }
