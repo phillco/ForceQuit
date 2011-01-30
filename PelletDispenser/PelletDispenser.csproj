@@ -40,7 +40,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -52,7 +51,6 @@
       <DependentUpon>AddSiteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
-    <Compile Include="HostsFileController.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,14 +86,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UnauthorizedBrowserKiller.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Website.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="PelletDispenser.ico" />
-    <Content Include="pellet_icon.ico" />
     <None Include="Resources\add.png" />
-    <Content Include="retro_toaster.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

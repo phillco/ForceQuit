@@ -66,14 +66,12 @@ namespace PelletDispenser
             {
                 Open = false;
                 NextUsableTime = DateTime.Now.AddMinutes( 30 );
-                HostsFileController.Rebuild( );
                 return;
             }
             
             UsesLeftToday--;
             Open = true;
             Configuration.Save( );
-            HostsFileController.Rebuild( );
 
             using ( Process process = new Process( ) )
             {
@@ -94,7 +92,7 @@ namespace PelletDispenser
         public override string ToString( )
         {
             if ( Open )
-                return String.Format( "{0} (push when done)", Name );
+                return String.Format( "{0} (open)", Name );
             else if ( DateTime.Now.CompareTo( NextUsableTime ) < 0 )
                 return String.Format( "{0} ({1} min)", Name, NextUsableTime.Subtract( DateTime.Now ).Minutes );
             else
