@@ -22,7 +22,7 @@ namespace ForceQuit
             {
                 return new Configuration
                 {
-                    Sites = new List<Website>();
+                    Sites = new List<Website>(),
                 };
             }
         }
