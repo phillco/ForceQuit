@@ -25,7 +25,7 @@ namespace ForceQuit
             {
                 Name = tbName.Text,
                 Url = tbUrl.Text,
-                DailyUses = numUses.Value,
+                DailyUses = (int) numUses.Value,
             };
 
             // Write the image to a file.
