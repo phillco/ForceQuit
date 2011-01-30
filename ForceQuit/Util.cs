@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     public class Util
     {

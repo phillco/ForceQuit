@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Diagnostics;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     /// <summary>
     /// Represents a distracting website that the user is managing.

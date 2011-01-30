@@ -4,15 +4,15 @@ using System.Text;
 using System.IO;
 using Newtonsoft.Json;
 using System.Threading;
-using PelletDispenser.Properties;
+using ForceQuit.Properties;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     public class Configuration
     {
         public List<Website> Sites { get; set; }
 
-        public const string FileName = "PelletDispenser.json";
+        public const string FileName = "ForceQuit.json";
 
         public static Configuration Instance { get; private set; }
 

@@ -8,11 +8,11 @@
     <ProjectGuid>{A9EA0507-0634-44B7-AF5A-88DC5C162013}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PelletDispenser</RootNamespace>
-    <AssemblyName>PelletDispenser</AssemblyName>
+    <RootNamespace>ForceQuit</RootNamespace>
+    <AssemblyName>ForceQuit</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>PelletDispenser.ico</ApplicationIcon>
+    <ApplicationIcon>ForceQuit.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +91,7 @@
     <Compile Include="Website.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PelletDispenser.ico" />
+    <Content Include="ForceQuit.ico" />
     <None Include="Resources\add.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

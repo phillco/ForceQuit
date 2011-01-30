@@ -7,10 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Net;
-using PelletDispenser.Properties;
+using ForceQuit.Properties;
 using System.IO;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     public partial class AddSiteForm : Form
     {

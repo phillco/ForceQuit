@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PelletDispenser", "PelletDispenser\PelletDispenser.csproj", "{A9EA0507-0634-44B7-AF5A-88DC5C162013}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForceQuit", "ForceQuit\ForceQuit.csproj", "{A9EA0507-0634-44B7-AF5A-88DC5C162013}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

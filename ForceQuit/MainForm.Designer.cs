@@ -1,4 +1,4 @@
-﻿namespace PelletDispenser
+﻿namespace ForceQuit
 {
     partial class MainForm
     {
@@ -47,7 +47,7 @@
             // 
             this.trayIcon.ContextMenuStrip = this.trayIconMenu;
             this.trayIcon.Icon = ( (System.Drawing.Icon) ( resources.GetObject( "trayIcon.Icon" ) ) );
-            this.trayIcon.Text = "Pellet Dispenser";
+            this.trayIcon.Text = "ForceQuit";
             this.trayIcon.Visible = true;
             this.trayIcon.MouseClick += new System.Windows.Forms.MouseEventHandler( this.trayIcon_MouseClick );
             // 
@@ -99,7 +99,7 @@
             // btnAddSite
             // 
             this.btnAddSite.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
-            this.btnAddSite.Image = global::PelletDispenser.Properties.Resources.add;
+            this.btnAddSite.Image = global::ForceQuit.Properties.Resources.add;
             this.btnAddSite.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddSite.Location = new System.Drawing.Point( 359, 145 );
             this.btnAddSite.Name = "btnAddSite";
@@ -127,7 +127,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size( 75, 75 );
             this.Name = "MainForm";
-            this.Text = "Pellet Dispenser";
+            this.Text = "ForceQuit";
             this.Load += new System.EventHandler( this.MainForm_Load );
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler( this.MainForm_FormClosing );
             this.Resize += new System.EventHandler( this.MainForm_Resize );

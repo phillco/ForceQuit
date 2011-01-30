@@ -7,8 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
+using System.IO;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     public partial class MainForm : Form
     {
@@ -76,7 +77,7 @@ namespace PelletDispenser
                 ContextMenuStrip = siteContextMenu,
                 Font = new Font( Font, FontStyle.Bold ),
                 Padding = new Padding( 4, 0, 4, 0 ),
-                Image = site.HasImage( ) ? Image.FromFile( site.ImageFilename ) : null,
+                Image = site.HasImage( ) && File.Exists( site.ImageFilename ) ? Image.FromFile( site.ImageFilename ) : null,
                 Top = 15,
                 ImageAlign = ContentAlignment.MiddleLeft,
                 TextAlign = ContentAlignment.MiddleRight

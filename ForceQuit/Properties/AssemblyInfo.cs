@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "PelletDispenser" )]
+[assembly: AssemblyTitle( "ForceQuit" )]
 [assembly: AssemblyDescription( "It's feeding time" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( "Phillip Cohen" )]
-[assembly: AssemblyProduct( "PelletDispenser" )]
+[assembly: AssemblyProduct( "ForceQuit" )]
 [assembly: AssemblyCopyright( "Copyright © Phillip Cohen 2011" )]
 [assembly: AssemblyTrademark( "" )]
 [assembly: AssemblyCulture( "" )]

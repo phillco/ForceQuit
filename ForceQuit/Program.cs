@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     static class Program
     {

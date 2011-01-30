@@ -1,4 +1,4 @@
-﻿namespace PelletDispenser
+﻿namespace ForceQuit
 {
     partial class AddSiteForm
     {

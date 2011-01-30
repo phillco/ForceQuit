@@ -4,10 +4,10 @@ using System.Text;
 using System.Diagnostics;
 using System.Threading;
 
-namespace PelletDispenser
+namespace ForceQuit
 {
     /// <summary>
-    /// Continuously searches for browsers that are open but haven't been authorized with PelletDispenser.
+    /// Continuously searches for browsers that are open but haven't been authorized with ForceQuit.
     /// </summary>
     public static class UnauthorizedBrowserKiller
     {
