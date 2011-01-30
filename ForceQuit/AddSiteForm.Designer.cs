@@ -42,7 +42,10 @@
             this.btnCancel = new System.Windows.Forms.Button( );
             this.fetchFaviconWorker = new System.ComponentModel.BackgroundWorker( );
             this.lookupTimer = new System.Windows.Forms.Timer( this.components );
+            this.numUses = new System.Windows.Forms.NumericUpDown( );
+            this.label4 = new System.Windows.Forms.Label( );
             ( (System.ComponentModel.ISupportInitialize) ( this.siteImage ) ).BeginInit( );
+            ( (System.ComponentModel.ISupportInitialize) ( this.numUses ) ).BeginInit( );
             this.SuspendLayout( );
             // 
             // label1
@@ -122,7 +125,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
-            this.btnOK.Location = new System.Drawing.Point( 229, 143 );
+            this.btnOK.Location = new System.Drawing.Point( 229, 134 );
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size( 65, 25 );
             this.btnOK.TabIndex = 8;
@@ -134,7 +137,7 @@
             // 
             this.btnCancel.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point( 300, 143 );
+            this.btnCancel.Location = new System.Drawing.Point( 300, 134 );
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size( 62, 25 );
             this.btnCancel.TabIndex = 9;
@@ -150,13 +153,41 @@
             this.lookupTimer.Interval = 500;
             this.lookupTimer.Tick += new System.EventHandler( this.lookupTimer_Tick );
             // 
+            // numUses
+            // 
+            this.numUses.Location = new System.Drawing.Point( 85, 99 );
+            this.numUses.Minimum = new decimal( new int[] {
+            1,
+            0,
+            0,
+            0} );
+            this.numUses.Name = "numUses";
+            this.numUses.Size = new System.Drawing.Size( 40, 22 );
+            this.numUses.TabIndex = 10;
+            this.numUses.Value = new decimal( new int[] {
+            3,
+            0,
+            0,
+            0} );
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point( 18, 101 );
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size( 61, 13 );
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Daily uses:";
+            // 
             // AddSiteForm
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size( 378, 180 );
+            this.ClientSize = new System.Drawing.Size( 378, 171 );
+            this.Controls.Add( this.label4 );
+            this.Controls.Add( this.numUses );
             this.Controls.Add( this.btnCancel );
             this.Controls.Add( this.btnOK );
             this.Controls.Add( this.siteImage );
@@ -172,6 +203,7 @@
             this.Name = "AddSiteForm";
             this.Text = "Add site";
             ( (System.ComponentModel.ISupportInitialize) ( this.siteImage ) ).EndInit( );
+            ( (System.ComponentModel.ISupportInitialize) ( this.numUses ) ).EndInit( );
             this.ResumeLayout( false );
             this.PerformLayout( );
 
@@ -191,5 +223,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.ComponentModel.BackgroundWorker fetchFaviconWorker;
         private System.Windows.Forms.Timer lookupTimer;
+        private System.Windows.Forms.NumericUpDown numUses;
+        private System.Windows.Forms.Label label4;
     }
 }

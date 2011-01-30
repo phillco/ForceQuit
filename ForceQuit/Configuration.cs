@@ -22,31 +22,7 @@ namespace ForceQuit
             {
                 return new Configuration
                 {
-                    Sites = new List<Website>
-                    {
-                        new Website
-                        {
-                            Name = "Gmail",
-                            Url = "https://gmail.com",
-                            DailyUses = 5,
-                            ImageFilename = @"images\gmail.ico",
-                        },
-                        
-                        new Website
-                        {
-                            Name = "Facebook",
-                            Url = "http://facebook.com",
-                            DailyUses = 5,
-                            ImageFilename = @"images\facebook.ico",
-                        },
-                        new Website
-                        {
-                            Name = "Twitter",
-                            Url = "http://twitter.com",
-                            DailyUses = 5,
-                            ImageFilename = @"images\twitter.ico",
-                        },
-                    }
+                    Sites = new List<Website>();
                 };
             }
         }
