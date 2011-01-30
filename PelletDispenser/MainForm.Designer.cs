@@ -38,6 +38,7 @@
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem( );
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem( );
             this.btnAddSite = new System.Windows.Forms.Button( );
+            this.updateTimer = new System.Windows.Forms.Timer( this.components );
             this.trayIconMenu.SuspendLayout( );
             this.siteContextMenu.SuspendLayout( );
             this.SuspendLayout( );
@@ -109,6 +110,12 @@
             this.btnAddSite.UseVisualStyleBackColor = true;
             this.btnAddSite.Click += new System.EventHandler( this.btnAddSite_Click );
             // 
+            // updateTimer
+            // 
+            this.updateTimer.Enabled = true;
+            this.updateTimer.Interval = 500;
+            this.updateTimer.Tick += new System.EventHandler( this.updateTimer_Tick );
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
@@ -140,6 +147,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Button btnAddSite;
+        private System.Windows.Forms.Timer updateTimer;
     }
 }
 

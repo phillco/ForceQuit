@@ -12,14 +12,16 @@ namespace PelletDispenser
     public class Website
     {
         public string Name { get; set; }
-        
+
         public string Url { get; set; }
 
         public string ImageFilename { get; set; }
 
         public int DailyUses { get; set; }
 
-        public DateTime LastUsed { get; set; }
+        public DateTime NextUsableTime { get; private set; }
+
+        public bool Open { get; private set; }
 
         public Uri Uri
         {
@@ -37,7 +39,7 @@ namespace PelletDispenser
                 if ( lastRolledOver.DayOfYear != DateTime.Now.DayOfYear )
                 {
                     usesLeftToday = DailyUses;
-                    lastRolledOver = DateTime.Now;                    
+                    lastRolledOver = DateTime.Now;
                 }
 
                 return usesLeftToday;
@@ -51,15 +53,28 @@ namespace PelletDispenser
 
         private int usesLeftToday;
 
-        private DateTime lastRolledOver;        
+        private DateTime lastRolledOver;
 
         public bool CanUse( )
         {
-            return ( UsesLeftToday > 0 ) && ( DateTime.Now.Subtract( LastUsed ).Minutes > 5 );
+            return Open || ( UsesLeftToday > 0 && ( DateTime.Now.CompareTo( NextUsableTime ) >= 0 ));
         }
 
         public void Use( )
         {
+            if ( Open )
+            {
+                Open = false;
+                NextUsableTime = DateTime.Now.AddMinutes( 30 );
+                HostsFileController.Rebuild( );
+                return;
+            }
+            
+            UsesLeftToday--;
+            Open = true;
+            Configuration.Save( );
+            HostsFileController.Rebuild( );
+
             using ( Process process = new Process( ) )
             {
                 string url = Url;
@@ -67,12 +82,8 @@ namespace PelletDispenser
                     url = "http://" + url;
 
                 process.StartInfo.FileName = url;
-                process.Start();
+                process.Start( );
             }
-
-            UsesLeftToday--;
-            LastUsed = DateTime.Now;
-            Configuration.Save( );
         }
 
         public bool HasImage( )
@@ -82,6 +93,11 @@ namespace PelletDispenser
 
         public override string ToString( )
         {
+            if ( Open )
+                return String.Format( "{0} (push when done)", Name );
+            else if ( DateTime.Now.CompareTo( NextUsableTime ) < 0 )
+                return String.Format( "{0} ({1} min)", Name, NextUsableTime.Subtract( DateTime.Now ).Minutes );
+            else
             return String.Format( "{0} ({1})", Name, UsesLeftToday );
         }
     }

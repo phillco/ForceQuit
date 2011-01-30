@@ -156,9 +156,9 @@ namespace PelletDispenser
         {
             Website site = (Website) button.Tag;
             button.Enabled = false;
-            site.Use( );
-            UpdateState( );
+            site.Use( );            
             Hide( );
+            rebuildSiteButtons( );
         }
 
         private void deleteToolStripMenuItem_Click( object sender, EventArgs e )
@@ -179,6 +179,11 @@ namespace PelletDispenser
         private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
         {
             trayIcon.Visible = false;
+        }
+
+        private void updateTimer_Tick( object sender, EventArgs e )
+        {
+            UpdateState( );
         }
     }
 }

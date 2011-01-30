@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Threading;
+using System.ServiceProcess;
 
 namespace PelletDispenser
 {
@@ -32,7 +33,7 @@ namespace PelletDispenser
                 writer.WriteLine( "# [DrugDealer Entries]" );
                 foreach ( Website site in Configuration.Instance.Sites )
                 {
-                    if ( !site.CanUse( ) )
+                    if ( !site.Open )
                     {
                         writer.WriteLine( "127.0.0.1 " + site.Uri.Host );
                         writer.WriteLine( "127.0.0.1 www." + site.Uri.Host );
@@ -42,31 +43,26 @@ namespace PelletDispenser
                 writer.Flush( );
             }
 
-            // Swap the two files. (retry a few times if the file is locked).
-            for ( int i = 0; i < 10; i++ )
+            // Swap the two files.
+            try
             {
-                try
-                {                    
-                    if ( File.Exists( hostsFile ) )
-                    {
-                        if ( File.Exists( hostsBackupFile ) )
-                            File.Delete( hostsBackupFile );
-
-                        File.Copy( hostsFile, hostsBackupFile );
-                        File.Delete( hostsFile );
-                    }
-
-                    File.Move( hostsTempFile, hostsFile );
-                    Console.WriteLine( "Hosts file rebuilt in " + ( Environment.TickCount - startTime ) / 1000.0 + " seconds." );
-                    return;
-                }
-                catch ( IOException )
+                if ( File.Exists( hostsFile ) )
                 {
-                    Thread.Sleep( i * 300 );
-                }
-            }
+                    if ( File.Exists( hostsBackupFile ) )
+                        File.Delete( hostsBackupFile );
 
-            Console.WriteLine( "Hosts file not rebuilt." );
+                    File.Copy( hostsFile, hostsBackupFile );
+                    File.Delete( hostsFile );
+                }
+
+                File.Move( hostsTempFile, hostsFile );
+                Console.WriteLine( "Hosts file rebuilt in " + ( Environment.TickCount - startTime ) / 1000.0 + " seconds." );
+                RestartService( );
+            }
+            catch ( IOException )
+            {
+                Console.WriteLine( "Hosts file not rebuilt." );
+            }
         }
 
         /// <summary>
@@ -82,10 +78,28 @@ namespace PelletDispenser
 
                     if ( line.Equals( "# [DrugDealer Entries]" ) )
                         return;
-                    
+
                     output.WriteLine( line );
                 }
             }
+        }
+
+        public static void RestartService( )
+        {
+            int startTime = Environment.TickCount;
+
+            ServiceController service = new ServiceController( "DNS Client" );
+
+            if ( service.Status == ServiceControllerStatus.Running )
+            {
+                service.Stop( );
+                service.WaitForStatus( ServiceControllerStatus.Stopped, TimeSpan.FromMilliseconds( 1500 ) );
+            }
+
+            service.Start( );
+            service.WaitForStatus( ServiceControllerStatus.Running, TimeSpan.FromMilliseconds( 1500 ) );
+
+            Console.WriteLine( "Restarted " + service.DisplayName + " in " + ( Environment.TickCount - startTime ) / 1000.0 + " seconds...");
         }
     }
 }
