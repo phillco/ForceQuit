@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Threading;
 
 namespace PelletDispenser
 {
@@ -16,6 +17,8 @@ namespace PelletDispenser
 
         private static string hostsTempFile = Path.Combine( hostsDir, "hosts.new" );
 
+        private static string hostsBackupFile = Path.Combine( hostsDir, "hosts.bak" );
+
         public static void Rebuild( )
         {
             int startTime = Environment.TickCount;
@@ -26,6 +29,7 @@ namespace PelletDispenser
                 parseExistingEntries( writer );
 
                 // Write the blocklist.
+                writer.WriteLine( "# [DrugDealer Entries]" );
                 foreach ( Website site in Configuration.Instance.Sites )
                 {
                     if ( !site.CanUse( ) )
@@ -34,15 +38,35 @@ namespace PelletDispenser
                         writer.WriteLine( "127.0.0.1 www." + site.Uri.Host );
                     }
                 }
+                writer.WriteLine( "# [/DrugDealer Entries]" );
+                writer.Flush( );
             }
 
-            // Swap the two files.
-            File.Delete( Path.Combine( hostsDir, "hosts.bak" ) );
-            File.Move( Path.Combine( hostsDir, "hosts" ), Path.Combine( hostsDir, "hosts.bak" ) );
-            File.Move( Path.Combine( hostsDir, "hosts.new" ), Path.Combine( hostsDir, "hosts" ) );
+            // Swap the two files. (retry a few times if the file is locked).
+            for ( int i = 0; i < 10; i++ )
+            {
+                try
+                {                    
+                    if ( File.Exists( hostsFile ) )
+                    {
+                        if ( File.Exists( hostsBackupFile ) )
+                            File.Delete( hostsBackupFile );
 
-            int stopTime = Environment.TickCount;
-            Console.WriteLine( "Hosts file rebuilt in " + ( stopTime - startTime ) / 1000.0 + " seconds." );
+                        File.Copy( hostsFile, hostsBackupFile );
+                        File.Delete( hostsFile );
+                    }
+
+                    File.Move( hostsTempFile, hostsFile );
+                    Console.WriteLine( "Hosts file rebuilt in " + ( Environment.TickCount - startTime ) / 1000.0 + " seconds." );
+                    return;
+                }
+                catch ( IOException )
+                {
+                    Thread.Sleep( i * 300 );
+                }
+            }
+
+            Console.WriteLine( "Hosts file not rebuilt." );
         }
 
         /// <summary>
@@ -56,31 +80,12 @@ namespace PelletDispenser
                 {
                     string line = reader.ReadLine( );
 
-                    if ( !lineMatchesSite( line ) )
-                        output.WriteLine( line );
+                    if ( line.Equals( "# [DrugDealer Entries]" ) )
+                        return;
+                    
+                    output.WriteLine( line );
                 }
             }
-        }
-
-        private static bool lineMatchesSite( string line )
-        {
-            // Skip commented lines.
-            if ( line.StartsWith( "#" ) )
-                return false;
-
-            string[] sections = line.Split( ' ' );
-
-            // Skip lines without a host.
-            if ( sections.Length < 2 )
-                return false;
-
-            string host = sections[1];
-
-            // If the host matches any of our sites (with or without the www.), return true.
-            return ( Configuration.Instance.Sites.Exists( site =>
-                host.Equals( site.Uri.Host, StringComparison.CurrentCultureIgnoreCase ) ||
-                host.Equals( "www." + site.Uri.Host, StringComparison.CurrentCultureIgnoreCase ) )
-            );
         }
     }
 }
