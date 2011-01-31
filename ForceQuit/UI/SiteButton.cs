@@ -31,11 +31,19 @@ namespace ForceQuit.UI
             // Use the downloaded icon, if available.
             if ( site.HasImage( ) && File.Exists( site.ImageFilename ) )
                 Image = Image.FromFile( site.ImageFilename );
+
+            RefreshState( );
         }
 
         public void Remove( )
         {
             Configuration.Instance.Sites.Remove( Website );
+        }
+
+        public void RefreshState( )
+        {
+            Text = Website.ToString();
+            Enabled = Website.CanUse( );
         }
 
         private void SiteButton_Click( object sender, EventArgs e )

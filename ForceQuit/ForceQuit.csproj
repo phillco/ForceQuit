@@ -89,6 +89,9 @@
     <Compile Include="UI\SiteButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UI\SiteButtonPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UnauthorizedBrowserKiller.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Website.cs" />

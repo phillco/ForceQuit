@@ -39,6 +39,7 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem( );
             this.btnAddSite = new System.Windows.Forms.Button( );
             this.updateTimer = new System.Windows.Forms.Timer( this.components );
+            this.websiteGroupBox = new System.Windows.Forms.GroupBox( );
             this.trayIconMenu.SuspendLayout( );
             this.siteContextMenu.SuspendLayout( );
             this.SuspendLayout( );
@@ -101,7 +102,7 @@
             this.btnAddSite.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right ) ) );
             this.btnAddSite.Image = global::ForceQuit.Properties.Resources.add;
             this.btnAddSite.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddSite.Location = new System.Drawing.Point( 359, 145 );
+            this.btnAddSite.Location = new System.Drawing.Point( 375, 144 );
             this.btnAddSite.Name = "btnAddSite";
             this.btnAddSite.Size = new System.Drawing.Size( 74, 26 );
             this.btnAddSite.TabIndex = 2;
@@ -116,17 +117,29 @@
             this.updateTimer.Interval = 500;
             this.updateTimer.Tick += new System.EventHandler( this.updateTimer_Tick );
             // 
+            // websiteGroupBox
+            // 
+            this.websiteGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.websiteGroupBox.Location = new System.Drawing.Point( 16, 16 );
+            this.websiteGroupBox.Name = "websiteGroupBox";
+            this.websiteGroupBox.Size = new System.Drawing.Size( 433, 122 );
+            this.websiteGroupBox.TabIndex = 3;
+            this.websiteGroupBox.TabStop = false;
+            this.websiteGroupBox.Text = "Your sites";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size( 445, 181 );
+            this.ClientSize = new System.Drawing.Size( 465, 180 );
+            this.Controls.Add( this.websiteGroupBox );
             this.Controls.Add( this.btnAddSite );
             this.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
             this.Icon = ( (System.Drawing.Icon) ( resources.GetObject( "$this.Icon" ) ) );
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size( 75, 75 );
+            this.MinimumSize = new System.Drawing.Size( 200, 200 );
             this.Name = "MainForm";
+            this.Padding = new System.Windows.Forms.Padding( 16, 16, 16, 42 );
             this.Text = "ForceQuit";
             this.Load += new System.EventHandler( this.MainForm_Load );
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler( this.MainForm_FormClosing );
@@ -148,6 +161,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.Button btnAddSite;
         private System.Windows.Forms.Timer updateTimer;
+        private System.Windows.Forms.GroupBox websiteGroupBox;
     }
 }
 

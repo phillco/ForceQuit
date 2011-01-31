@@ -16,12 +16,15 @@ namespace ForceQuit.UI
     {
         public static MainForm Instance { get; private set; }
 
-        private List<SiteButton> SiteButtons = new List<SiteButton>( );
+        private SiteButtonPanel siteButtonPanel;
 
         public MainForm( )
         {
-            Instance = this;
+            Instance = this;            
             InitializeComponent( );
+            siteButtonPanel = new SiteButtonPanel( siteContextMenu );
+            websiteGroupBox.Controls.Add( siteButtonPanel );
+            websiteGroupBox.SizeChanged += ( sender, e ) => siteButtonPanel.Reflow( );
 
             // Hide the window initially.    
             if ( false )
@@ -30,7 +33,7 @@ namespace ForceQuit.UI
                 ShowInTaskbar = false;
             }
 
-            rebuildSiteButtons( );
+            siteButtonPanel.Reflow( );
         }
 
         public void ShowBrowserKilledBalloon( Website culprit )
@@ -43,62 +46,7 @@ namespace ForceQuit.UI
                 using ( SoundPlayer player = new SoundPlayer( Properties.Resources.PriceIsWrong ) )
                     player.Play( );
             } ) );
-        }
-
-        private void rebuildSiteButtons( )
-        {
-            foreach ( Button b in SiteButtons )
-                Controls.Remove( b );
-            SiteButtons.Clear( );
-
-            // Create the buttons for each site. 
-            int x = 15;
-            int y = 15;
-            int widestButton = 0;
-            foreach ( Website site in Configuration.Instance.Sites )
-            {
-                SiteButton button = new SiteButton( site );
-                button.ContextMenuStrip = siteContextMenu;
-
-                // Start a new row if needed.
-                if ( x + button.Width + 15 > Width )
-                {
-                    x = 15;
-                    y += button.Height + 10;
-                }
-
-                button.Left = x;
-                button.Top = y;
-
-                if ( button.Width > widestButton )
-                    widestButton = button.Width;
-
-                x += button.Width + 10;
-
-                Controls.Add( button );
-                SiteButtons.Add( button );
-            }
-
-            MinimumSize = new Size( widestButton + 48, y + 125 );
-
-            UpdateState( );
-        }
-
-        private void UpdateState( )
-        {
-            // If this method was called by a different thread, invoke it to run on the form thread.
-            if ( InvokeRequired )
-            {
-                BeginInvoke( new MethodInvoker( delegate { UpdateState( ); } ) );
-                return;
-            }
-
-            foreach ( SiteButton b in SiteButtons )
-            {
-                b.Enabled = b.Website.CanUse( );
-                b.Text = b.Website.ToString( );
-            }
-        }
+        }   
 
         private void exitToolStripMenuItem_Click( object sender, EventArgs e )
         {
@@ -136,22 +84,18 @@ namespace ForceQuit.UI
         private void MainForm_Resize( object sender, EventArgs e )
         {
             if ( WindowState == FormWindowState.Minimized )
-                Hide( );
-
-            rebuildSiteButtons( );
+                Hide( );           
         }
 
         private void deleteToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            SiteButton button = (SiteButton) siteContextMenu.SourceControl;
-            button.Remove( );            
-            rebuildSiteButtons( );
+            siteButtonPanel.Remove( (SiteButton) siteContextMenu.SourceControl );
         }
 
         private void btnAddSite_Click( object sender, EventArgs e )
         {
             new AddSiteForm( ).ShowDialog( );
-            rebuildSiteButtons( );
+            siteButtonPanel.Reflow( );
         }
 
         private void MainForm_FormClosing( object sender, FormClosingEventArgs e )
@@ -161,7 +105,6 @@ namespace ForceQuit.UI
 
         private void updateTimer_Tick( object sender, EventArgs e )
         {
-            UpdateState( );
         }
     }
 }
