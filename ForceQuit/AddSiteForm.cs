@@ -31,6 +31,9 @@ namespace ForceQuit
             // Write the image to a file.
             if ( siteImage.Image != null )
             {
+                if ( !Directory.Exists( "images" ) )
+                    Directory.CreateDirectory( "images" );
+
                 string imagePath = Path.Combine( @"images\", tbName.Text + ".ico" );
                 siteImage.Image.Save( imagePath, System.Drawing.Imaging.ImageFormat.Icon );
                 siteToSave.ImageFilename = imagePath;
