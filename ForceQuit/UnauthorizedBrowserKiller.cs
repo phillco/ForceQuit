@@ -34,10 +34,13 @@ namespace ForceQuit
             {
                 foreach ( Process p in Process.GetProcesses( ) )
                 {
-                    if ( isMatch( p.MainWindowTitle ) )
+                    Website matchingSite = findMatchingSite( p.MainWindowTitle );
+
+                    if ( matchingSite != null && browsers.Exists( browser => stringContainsIgnoreCase( p.MainWindowTitle, browser ) ))
                     {
-                        Console.WriteLine( p.MainWindowTitle + " is a match." );
+                        Console.WriteLine( p.MainWindowTitle + " is a match for " + matchingSite.Name + "." );
                         p.Kill( );
+                        MainForm.Instance.ShowBrowserKilledBalloon( matchingSite );
                     }
                 }
 
@@ -45,12 +48,9 @@ namespace ForceQuit
             }
         }
 
-
-        private static bool isMatch( string titlebar )
+        private static Website findMatchingSite( string titlebar )
         {
-            // Return true if a program matches one of our inactive sites...
-            return Configuration.Instance.Sites.Exists( site => !site.Open && stringContainsIgnoreCase( titlebar, site.Name )) &&
-                browsers.Exists( browser => stringContainsIgnoreCase( titlebar, browser ) ); // ...AND is a web browser.         
+            return Configuration.Instance.Sites.Find( site => !site.Open && stringContainsIgnoreCase( titlebar, site.Name ) );
         }
 
         /// <summary>

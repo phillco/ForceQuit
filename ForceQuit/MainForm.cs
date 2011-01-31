@@ -13,10 +13,13 @@ namespace ForceQuit
 {
     public partial class MainForm : Form
     {
-        private List<Button> SiteButtons = new List<Button>( );
+        public static MainForm Instance { get; private set; }
+
+        private List<Button> SiteButtons = new List<Button>( );        
 
         public MainForm( )
         {
+            Instance = this;
             InitializeComponent( );
 
             // Hide the window initially.    
@@ -27,6 +30,11 @@ namespace ForceQuit
             }
 
             rebuildSiteButtons( );
+        }
+
+        public void ShowBrowserKilledBalloon( Website culprit )
+        {
+            trayIcon.ShowBalloonTip( 1000, "Naughty, naughty!", "We found you going to " + culprit.Name + " without using up a dosage, so we killed your browser.", ToolTipIcon.Info );
         }
 
         private void rebuildSiteButtons( )
