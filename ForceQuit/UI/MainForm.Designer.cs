@@ -142,6 +142,7 @@
             // 
             // lblBreakTimeRemaining
             // 
+            this.lblBreakTimeRemaining.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
             this.lblBreakTimeRemaining.AutoSize = true;
             this.lblBreakTimeRemaining.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
             this.lblBreakTimeRemaining.Location = new System.Drawing.Point( 134, 151 );
