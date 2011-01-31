@@ -16,7 +16,7 @@ namespace ForceQuit.UI
     {
         public static MainForm Instance { get; private set; }
 
-        private List<Button> SiteButtons = new List<Button>( );
+        private List<SiteButton> SiteButtons = new List<SiteButton>( );
 
         public MainForm( )
         {
@@ -57,7 +57,8 @@ namespace ForceQuit.UI
             int widestButton = 0;
             foreach ( Website site in Configuration.Instance.Sites )
             {
-                Button button = createSiteButton( site );
+                SiteButton button = new SiteButton( site );
+                button.ContextMenuStrip = siteContextMenu;
 
                 // Start a new row if needed.
                 if ( x + button.Width + 15 > Width )
@@ -83,27 +84,6 @@ namespace ForceQuit.UI
             UpdateState( );
         }
 
-        private Button createSiteButton( Website site )
-        {
-            Button button = new Button
-            {
-                Tag = site,
-                Width = (int) ( 40 + site.ToString( ).Length * 5.75 ), // HACK
-                Height = 32,
-                ContextMenuStrip = siteContextMenu,
-                Font = new Font( Font, FontStyle.Bold ),
-                Padding = new Padding( 4, 0, 4, 0 ),
-                Image = site.HasImage( ) && File.Exists( site.ImageFilename ) ? Image.FromFile( site.ImageFilename ) : null,
-                Top = 15,
-                ImageAlign = ContentAlignment.MiddleLeft,
-                TextAlign = ContentAlignment.MiddleRight
-            };
-
-            button.MouseClick += ( sender, e ) => siteButton_MouseClick( button, e );
-            button.AutoSize = false;
-            return button;
-        }
-
         private void UpdateState( )
         {
             // If this method was called by a different thread, invoke it to run on the form thread.
@@ -113,12 +93,10 @@ namespace ForceQuit.UI
                 return;
             }
 
-            foreach ( Button b in SiteButtons )
+            foreach ( SiteButton b in SiteButtons )
             {
-                Website site = (Website) b.Tag;
-
-                b.Enabled = site.CanUse( );
-                b.Text = site.ToString( );
+                b.Enabled = b.Website.CanUse( );
+                b.Text = b.Website.ToString( );
             }
         }
 
@@ -145,12 +123,6 @@ namespace ForceQuit.UI
                 } ) );
         }
 
-        private void siteButton_MouseClick( Button button, MouseEventArgs e )
-        {
-            if ( e.Button == MouseButtons.Left )
-                SiteButtonClicked( button );
-        }
-
         private void trayIcon_MouseClick( object sender, MouseEventArgs e )
         {
             if ( e.Button == MouseButtons.Left )
@@ -169,21 +141,10 @@ namespace ForceQuit.UI
             rebuildSiteButtons( );
         }
 
-        private void SiteButtonClicked( Button button )
-        {
-            Website site = (Website) button.Tag;
-            button.Enabled = false;
-            site.Use( );
-            Hide( );
-            rebuildSiteButtons( );
-        }
-
         private void deleteToolStripMenuItem_Click( object sender, EventArgs e )
         {
-            Button button = (Button) siteContextMenu.SourceControl;
-            Website site = (Website) button.Tag;
-
-            Configuration.Instance.Sites.Remove( site );
+            SiteButton button = (SiteButton) siteContextMenu.SourceControl;
+            button.Remove( );            
             rebuildSiteButtons( );
         }
 
