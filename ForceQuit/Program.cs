@@ -16,7 +16,7 @@ namespace ForceQuit
         static void Main( )
         {
             Configuration.Initialize( );
-
+            
             Application.EnableVisualStyles( );
             Application.SetCompatibleTextRenderingDefault( false );
 

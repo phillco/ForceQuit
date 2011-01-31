@@ -12,6 +12,18 @@ namespace ForceQuit
     {
         public List<Website> Sites { get; set; }
 
+        public bool BreakActive
+        {
+            get
+            {
+                return ( BreakEnds.CompareTo( DateTime.Now ) > 0 );
+            }
+        }
+
+        public DateTime BreakEnds { get; set; }
+
+        public DateTime NextAllowedBreak { get; set; }
+
         public const string FileName = "ForceQuit.json";
 
         public static Configuration Instance { get; private set; }
@@ -22,7 +34,7 @@ namespace ForceQuit
             {
                 return new Configuration
                 {
-                    Sites = new List<Website>(),
+                    Sites = new List<Website>( ),
                 };
             }
         }

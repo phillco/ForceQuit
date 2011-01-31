@@ -40,6 +40,8 @@
             this.btnAddSite = new System.Windows.Forms.Button( );
             this.updateTimer = new System.Windows.Forms.Timer( this.components );
             this.websiteGroupBox = new System.Windows.Forms.GroupBox( );
+            this.btnStartBreak = new System.Windows.Forms.Button( );
+            this.lblBreakTimeRemaining = new System.Windows.Forms.Label( );
             this.trayIconMenu.SuspendLayout( );
             this.siteContextMenu.SuspendLayout( );
             this.SuspendLayout( );
@@ -127,12 +129,35 @@
             this.websiteGroupBox.TabStop = false;
             this.websiteGroupBox.Text = "Your sites";
             // 
+            // btnStartBreak
+            // 
+            this.btnStartBreak.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left ) ) );
+            this.btnStartBreak.Location = new System.Drawing.Point( 16, 144 );
+            this.btnStartBreak.Name = "btnStartBreak";
+            this.btnStartBreak.Size = new System.Drawing.Size( 112, 26 );
+            this.btnStartBreak.TabIndex = 4;
+            this.btnStartBreak.Text = "Start break!";
+            this.btnStartBreak.UseVisualStyleBackColor = true;
+            this.btnStartBreak.Click += new System.EventHandler( this.btnStartBreak_Click );
+            // 
+            // lblBreakTimeRemaining
+            // 
+            this.lblBreakTimeRemaining.AutoSize = true;
+            this.lblBreakTimeRemaining.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
+            this.lblBreakTimeRemaining.Location = new System.Drawing.Point( 134, 151 );
+            this.lblBreakTimeRemaining.Name = "lblBreakTimeRemaining";
+            this.lblBreakTimeRemaining.Size = new System.Drawing.Size( 107, 13 );
+            this.lblBreakTimeRemaining.TabIndex = 5;
+            this.lblBreakTimeRemaining.Text = "25 min remaining...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF( 6F, 13F );
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size( 465, 180 );
+            this.Controls.Add( this.lblBreakTimeRemaining );
             this.Controls.Add( this.websiteGroupBox );
+            this.Controls.Add( this.btnStartBreak );
             this.Controls.Add( this.btnAddSite );
             this.Font = new System.Drawing.Font( "Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ( (byte) ( 0 ) ) );
             this.Icon = ( (System.Drawing.Icon) ( resources.GetObject( "$this.Icon" ) ) );
@@ -147,6 +172,7 @@
             this.trayIconMenu.ResumeLayout( false );
             this.siteContextMenu.ResumeLayout( false );
             this.ResumeLayout( false );
+            this.PerformLayout( );
 
         }
 
@@ -162,6 +188,8 @@
         private System.Windows.Forms.Button btnAddSite;
         private System.Windows.Forms.Timer updateTimer;
         private System.Windows.Forms.GroupBox websiteGroupBox;
+        private System.Windows.Forms.Button btnStartBreak;
+        private System.Windows.Forms.Label lblBreakTimeRemaining;
     }
 }
 

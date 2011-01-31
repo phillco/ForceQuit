@@ -14,6 +14,8 @@ namespace ForceQuit.UI
     {
         public Website Website { get; private set; }
 
+        public bool SelectedForBreak { get; set; }
+
         public SiteButton( Website site )
         {
             this.Website = site;
@@ -35,21 +37,18 @@ namespace ForceQuit.UI
             RefreshState( );
         }
 
-        public void Remove( )
-        {
-            Configuration.Instance.Sites.Remove( Website );
-        }
-
         public void RefreshState( )
         {
             Text = Website.ToString();
-            Enabled = Website.CanUse( );
+            Enabled = !SelectedForBreak && Website.CanUse( );
         }
 
         private void SiteButton_Click( object sender, EventArgs e )
         {
-            Enabled = false;
-            Website.Use( );
+            SelectedForBreak = true;
+            Website.UsesLeftToday--;
+            RefreshState( );
+            MainForm.Instance.UpdateTakeBreakButton( );
         }
 
     }

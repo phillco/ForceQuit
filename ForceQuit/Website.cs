@@ -19,9 +19,7 @@ namespace ForceQuit
 
         public int DailyUses { get; set; }
 
-        public DateTime NextUsableTime { get; private set; }
-
-        public bool Open { get; private set; }
+        public bool Open { get; set; }
 
         public Uri Uri
         {
@@ -57,21 +55,12 @@ namespace ForceQuit
 
         public bool CanUse( )
         {
-            return Open || ( UsesLeftToday > 0 && ( DateTime.Now.CompareTo( NextUsableTime ) >= 0 ));
+            return Open || ( UsesLeftToday > 0 );
         }
 
         public void Use( )
-        {
-            if ( Open )
-            {
-                Open = false;
-                NextUsableTime = DateTime.Now.AddMinutes( 30 );
-                return;
-            }
-            
-            UsesLeftToday--;
+        {            
             Open = true;
-            Configuration.Save( );
 
             using ( Process process = new Process( ) )
             {
@@ -91,11 +80,6 @@ namespace ForceQuit
 
         public override string ToString( )
         {
-            if ( Open )
-                return String.Format( "{0} (open)", Name );
-            else if ( DateTime.Now.CompareTo( NextUsableTime ) < 0 )
-                return String.Format( "{0} ({1} min)", Name, NextUsableTime.Subtract( DateTime.Now ).Minutes );
-            else
             return String.Format( "{0} ({1})", Name, UsesLeftToday );
         }
     }

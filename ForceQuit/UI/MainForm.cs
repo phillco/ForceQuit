@@ -20,7 +20,7 @@ namespace ForceQuit.UI
 
         public MainForm( )
         {
-            Instance = this;            
+            Instance = this;
             InitializeComponent( );
             siteButtonPanel = new SiteButtonPanel( siteContextMenu );
             websiteGroupBox.Controls.Add( siteButtonPanel );
@@ -34,19 +34,63 @@ namespace ForceQuit.UI
             }
 
             siteButtonPanel.Reflow( );
+            updateState( );
+        }
+
+        public void UpdateTakeBreakButton( )
+        {
+            updateState( );
         }
 
         public void ShowBrowserKilledBalloon( Website culprit )
         {
             BeginInvoke( new MethodInvoker( delegate
             {
-                trayIcon.ShowBalloonTip( 2000, "ForceQuit", "We found you going to " + culprit.Name + " without using up a dosage, so we killed your browser.", ToolTipIcon.Info );
+                trayIcon.ShowBalloonTip( 2000, "ForceQuit", "We found you going to " + culprit.Name + " without starting a break, so we killed your browser.", ToolTipIcon.Info );
 
                 // As if that wasn't enough...
                 using ( SoundPlayer player = new SoundPlayer( Properties.Resources.PriceIsWrong ) )
                     player.Play( );
             } ) );
-        }   
+        }
+
+        private void updateState( )
+        {
+            if ( Configuration.Instance.BreakActive )
+            {
+                btnStartBreak.Text = "Finish break";
+                lblBreakTimeRemaining.Text = String.Format( "{0} min remaining...", Configuration.Instance.BreakEnds.Subtract( DateTime.Now ).Minutes + 1 );
+                lblBreakTimeRemaining.Visible = true;
+                siteButtonPanel.Enabled = false;
+            }
+            else
+            {
+                if ( Configuration.Instance.NextAllowedBreak.CompareTo( DateTime.Now ) > 0 )
+                {
+                    lblBreakTimeRemaining.Text = String.Format( "{0} min until next break...", Configuration.Instance.NextAllowedBreak.Subtract( DateTime.Now ).Seconds + 1 );
+                    lblBreakTimeRemaining.Visible = true;
+                    siteButtonPanel.Enabled = false;
+                    btnStartBreak.Enabled = false;
+                }
+                else
+                {
+                    if ( siteButtonPanel.GetSelectedForBreak( ).Count > 0 )
+                    {
+                        btnStartBreak.Text = String.Format( "Start break! ({0})", siteButtonPanel.GetSelectedForBreak( ).Count );
+                        btnStartBreak.Enabled = true;
+                    }
+                    else
+                    {
+                        btnStartBreak.Text = "Start break!";
+                        btnStartBreak.Enabled = false;
+                    }
+                    lblBreakTimeRemaining.Visible = false;
+                    siteButtonPanel.Enabled = true;
+                }
+            }
+
+            siteButtonPanel.RefreshState( );
+        }
 
         private void exitToolStripMenuItem_Click( object sender, EventArgs e )
         {
@@ -84,7 +128,7 @@ namespace ForceQuit.UI
         private void MainForm_Resize( object sender, EventArgs e )
         {
             if ( WindowState == FormWindowState.Minimized )
-                Hide( );           
+                Hide( );
         }
 
         private void deleteToolStripMenuItem_Click( object sender, EventArgs e )
@@ -105,6 +149,41 @@ namespace ForceQuit.UI
 
         private void updateTimer_Tick( object sender, EventArgs e )
         {
+            updateState( );
+        }
+
+        private void finishBreak( )
+        {
+            Configuration.Instance.BreakEnds = DateTime.MinValue;
+            Configuration.Instance.NextAllowedBreak = DateTime.Now.AddSeconds( 15 );
+            foreach ( Website w in Configuration.Instance.Sites )
+                w.Open = false;
+            foreach ( SiteButton button in siteButtonPanel.Buttons )
+                button.SelectedForBreak = false;
+        }
+
+        private void btnStartBreak_Click( object sender, EventArgs e )
+        {            
+            if ( Configuration.Instance.BreakActive )
+            {
+                MessageBox.Show( "Be sure you close any browser tabs that you used on your break.", "End break", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                finishBreak( );                
+            }
+            else
+            {
+                Configuration.Instance.BreakEnds = DateTime.Now.AddMinutes( 30 );
+                Hide( );
+
+                foreach ( SiteButton button in siteButtonPanel.GetSelectedForBreak( ) )
+                {
+                    button.Website.Use( );
+                    Thread.Sleep( 1300 );
+                }
+            }
+
+            updateState( );
+            siteButtonPanel.Reflow( );
+            Configuration.Save( );
         }
     }
 }

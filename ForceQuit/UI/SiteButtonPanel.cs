@@ -8,7 +8,7 @@ namespace ForceQuit.UI
 {
     class SiteButtonPanel : Panel
     {
-        private List<SiteButton> buttons = new List<SiteButton>( );
+        public List<SiteButton> Buttons = new List<SiteButton>( );
 
         private ContextMenuStrip siteButtonMenu;
 
@@ -22,20 +22,23 @@ namespace ForceQuit.UI
 
         public void RefreshState( )
         {
-            foreach ( SiteButton button in buttons )
+            foreach ( SiteButton button in Buttons )
                 button.RefreshState( );
         }
 
         public void Remove( SiteButton button )
         {
-            button.Remove( );
-            buttons.Remove( button );
+            Configuration.Instance.Sites.Remove( button.Website );
             Reflow( );
+        }
+
+        public List<SiteButton> GetSelectedForBreak( )
+        {
+            return Buttons.FindAll( button => button.SelectedForBreak );
         }
 
         public void Reflow( )
         {
-
             // Create the buttons for each site. 
             List<SiteButton> newLayout = new List<SiteButton>( );
             int x = Padding.Left, y = Padding.Top;
@@ -60,12 +63,12 @@ namespace ForceQuit.UI
 
             if ( isLayoutDifferent( newLayout ) )
             {
-                foreach ( SiteButton b in buttons )
+                foreach ( SiteButton b in Buttons )
                     Controls.Remove( b );
 
-                buttons = newLayout;
+                Buttons = newLayout;
 
-                foreach ( SiteButton b in buttons )
+                foreach ( SiteButton b in Buttons )
                     Controls.Add( b );
 
             }
@@ -80,12 +83,12 @@ namespace ForceQuit.UI
 
         private bool isLayoutDifferent( List<SiteButton> newLayout )
         {
-            if ( newLayout.Count != buttons.Count )
+            if ( newLayout.Count != Buttons.Count )
                 return true;
 
-            for ( int i = 0; i < buttons.Count; i++ )
+            for ( int i = 0; i < Buttons.Count; i++ )
             {
-                if ( buttons[i].Location != newLayout[i].Location )
+                if ( Buttons[i].Location != newLayout[i].Location )
                     return true;
             }
 
