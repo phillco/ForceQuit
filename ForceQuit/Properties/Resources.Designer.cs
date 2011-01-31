@@ -66,5 +66,11 @@ namespace ForceQuit.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.IO.UnmanagedMemoryStream PriceIsWrong {
+            get {
+                return ResourceManager.GetStream("PriceIsWrong", resourceCulture);
+            }
+        }
     }
 }

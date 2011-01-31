@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 
 namespace ForceQuit
 {
@@ -15,7 +16,7 @@ namespace ForceQuit
     {
         public static MainForm Instance { get; private set; }
 
-        private List<Button> SiteButtons = new List<Button>( );        
+        private List<Button> SiteButtons = new List<Button>( );
 
         public MainForm( )
         {
@@ -34,7 +35,14 @@ namespace ForceQuit
 
         public void ShowBrowserKilledBalloon( Website culprit )
         {
-            trayIcon.ShowBalloonTip( 1000, "Naughty, naughty!", "We found you going to " + culprit.Name + " without using up a dosage, so we killed your browser.", ToolTipIcon.Info );
+            BeginInvoke( new MethodInvoker( delegate
+            {
+                trayIcon.ShowBalloonTip( 2000, "ForceQuit", "We found you going to " + culprit.Name + " without using up a dosage, so we killed your browser.", ToolTipIcon.Info );
+
+                // As if that wasn't enough...
+                using ( SoundPlayer player = new SoundPlayer( Properties.Resources.PriceIsWrong ) )
+                    player.Play( );
+            } ) );
         }
 
         private void rebuildSiteButtons( )
@@ -165,7 +173,7 @@ namespace ForceQuit
         {
             Website site = (Website) button.Tag;
             button.Enabled = false;
-            site.Use( );            
+            site.Use( );
             Hide( );
             rebuildSiteButtons( );
         }
