@@ -67,7 +67,7 @@ namespace ForceQuit.UI
             {
                 if ( Configuration.Instance.NextAllowedBreak.CompareTo( DateTime.Now ) > 0 )
                 {
-                    lblBreakTimeRemaining.Text = String.Format( "{0} min until next break...", Configuration.Instance.NextAllowedBreak.Subtract( DateTime.Now ).Seconds + 1 );
+                    lblBreakTimeRemaining.Text = String.Format( "{0} min until next break...", Configuration.Instance.NextAllowedBreak.Subtract( DateTime.Now ).Minutes + 1 );
                     lblBreakTimeRemaining.Visible = true;
                     siteButtonPanel.Enabled = false;
                     btnStartBreak.Enabled = false;
@@ -155,7 +155,7 @@ namespace ForceQuit.UI
         private void finishBreak( )
         {
             Configuration.Instance.BreakEnds = DateTime.MinValue;
-            Configuration.Instance.NextAllowedBreak = DateTime.Now.AddSeconds( 15 );
+            Configuration.Instance.NextAllowedBreak = DateTime.Now.AddMinutes( 30 );
             foreach ( Website w in Configuration.Instance.Sites )
                 w.Open = false;
             foreach ( SiteButton button in siteButtonPanel.Buttons )
