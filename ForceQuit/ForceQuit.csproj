@@ -44,26 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddSiteForm.cs">
+    <Compile Include="UI\AddSiteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddSiteForm.Designer.cs">
+    <Compile Include="UI\AddSiteForm.Designer.cs">
       <DependentUpon>AddSiteForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Configuration.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddSiteForm.resx">
+    <EmbeddedResource Include="UI\AddSiteForm.resx">
       <DependentUpon>AddSiteForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

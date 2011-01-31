@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Media;
 
-namespace ForceQuit
+namespace ForceQuit.UI
 {
     public partial class MainForm : Form
     {

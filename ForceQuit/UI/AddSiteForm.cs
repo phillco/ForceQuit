@@ -10,7 +10,7 @@ using System.Net;
 using ForceQuit.Properties;
 using System.IO;
 
-namespace ForceQuit
+namespace ForceQuit.UI
 {
     public partial class AddSiteForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace ForceQuit
+﻿namespace ForceQuit.UI
 {
     partial class MainForm
     {
