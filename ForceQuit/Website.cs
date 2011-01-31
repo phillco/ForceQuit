@@ -29,29 +29,19 @@ namespace ForceQuit
             }
         }
 
-        public int UsesLeftToday
-        {
-            get
-            {
-                // Roll over the uses for today.
-                if ( lastRolledOver.DayOfYear != DateTime.Now.DayOfYear )
-                {
-                    usesLeftToday = DailyUses;
-                    lastRolledOver = DateTime.Now;
-                }
-
-                return usesLeftToday;
-            }
-
-            set
-            {
-                usesLeftToday = value;
-            }
-        }
-
-        private int usesLeftToday;
+        public int UsesLeftToday { get; set; }
 
         private DateTime lastRolledOver;
+
+        public void RollOverDates( )
+        {
+            // Roll over the uses for today.
+            if ( lastRolledOver.DayOfYear != DateTime.Now.DayOfYear )
+            {
+                UsesLeftToday = DailyUses;
+                lastRolledOver = DateTime.Now;
+            }
+        }
 
         public bool CanUse( )
         {
